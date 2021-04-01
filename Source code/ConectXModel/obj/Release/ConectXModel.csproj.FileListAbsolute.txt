@@ -1,0 +1,13 @@
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ConectXModel.dll.config
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ConectXModel.dll
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ConectXModel.pdb
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\obj\Release\ConectXModel.dll
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\obj\Release\ConectXModel.pdb
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\EPPlus.dll
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\EPPlus.xml
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\obj\Release\ConectXModel.csproj.CopyComplete
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ExcelDataReader.dll
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ExcelDataReader.pdb
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\bin\Release\ExcelDataReader.xml
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\obj\Release\ConectXModel.csproj.CoreCompileInputs.cache
+C:\Users\MrLinh\source\repos\CNPM_Project\ConectXModel\obj\Release\ConectXModel.csprojAssemblyReference.cache

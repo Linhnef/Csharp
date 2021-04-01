@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TrafficManagement" Class="QL_VP_CNPMDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=MRLINH-PC\SQLEXPRESS;Initial Catalog=TrafficManagement;Persist Security Info=True;User ID=sa" SettingsObjectName="ConectXModel.Properties.Settings" SettingsPropertyName="TrafficManagementConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.vehicle_X_mistake" Member="vehicle_X_mistakes">
+    <Type Name="vehicle_X_mistake">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descride_mistake" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="time_" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="type_of_mistake_vehicle_X_mistake" Member="type_of_mistake" ThisKey="mistake_ID" OtherKey="mistake_ID" Type="type_of_mistake" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="vehicle_vehicle_X_mistake" Member="vehicle" ThisKey="vehicle_ID" OtherKey="vehicle_ID" Type="vehicle" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Admin_data" Member="Admin_datas">
+    <Type Name="Admin_data">
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Association Name="Admin_data_history" Member="histories" ThisKey="ID_admin" OtherKey="ID_admin" Type="history" />
+    </Type>
+  </Table>
+  <Table Name="dbo.history" Member="histories">
+    <Type Name="history">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activity" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Admin_data_history" Member="Admin_data" ThisKey="ID_admin" OtherKey="ID_admin" Type="Admin_data" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Information" Member="Informations">
+    <Type Name="Information">
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Fname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Information_request" Member="requests" ThisKey="ID_card" OtherKey="ID_card" Type="request" />
+      <Association Name="Information_user_status" Member="user_status" ThisKey="ID_card" OtherKey="ID_card" Type="user_status" />
+      <Association Name="Information_vehicle_X_infor" Member="vehicle_X_infors" ThisKey="ID_card" OtherKey="ID_card" Type="vehicle_X_infor" />
+    </Type>
+  </Table>
+  <Table Name="dbo.request" Member="requests">
+    <Type Name="request">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="conplain" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="request" Member="request1" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="reply" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="time_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Information_request" Member="Information" ThisKey="ID_card" OtherKey="ID_card" Type="Information" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.type_of_mistake" Member="type_of_mistakes">
+    <Type Name="type_of_mistake">
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="descride" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="charge" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="type_of_mistake_vehicle_X_mistake" Member="vehicle_X_mistakes" ThisKey="mistake_ID" OtherKey="mistake_ID" Type="vehicle_X_mistake" />
+    </Type>
+  </Table>
+  <Table Name="dbo.user_status" Member="user_status">
+    <Type Name="user_status">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Information_user_status" Member="Information" ThisKey="ID_card" OtherKey="ID_card" Type="Information" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vehicle" Member="vehicles">
+    <Type Name="vehicle">
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="frame_Number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="machine_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="brand" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="origin" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="vehicle_vehicle_X_mistake" Member="vehicle_X_mistakes" ThisKey="vehicle_ID" OtherKey="vehicle_ID" Type="vehicle_X_mistake" />
+      <Association Name="vehicle_vehicle_X_infor" Member="vehicle_X_infors" ThisKey="vehicle_ID" OtherKey="vehicle_ID" Type="vehicle_X_infor" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vehicle_X_infor" Member="vehicle_X_infors">
+    <Type Name="vehicle_X_infor">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Information_vehicle_X_infor" Member="Information" ThisKey="ID_card" OtherKey="ID_card" Type="Information" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="vehicle_vehicle_X_infor" Member="vehicle" ThisKey="vehicle_ID" OtherKey="vehicle_ID" Type="vehicle" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.USP_AdminTable" Method="USP_AdminTable">
+    <ElementType Name="USP_AdminTableResult">
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_vehicleTable" Method="USP_vehicleTable">
+    <ElementType Name="USP_vehicleTableResult">
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frame_Number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="machine_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="brand" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="origin" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_deleteAdmin" Method="USP_deleteAdmin">
+    <Parameter Name="ID_admin" Parameter="iD_admin" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteAllHistory" Method="USP_deleteAllHistory">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteHistory" Method="USP_deleteHistory">
+    <Parameter Name="admin_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteRequest" Method="USP_deleteRequest">
+    <Parameter Name="ID_card" Parameter="iD_card" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteTOM" Method="USP_deleteTOM">
+    <Parameter Name="mistake_ID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteUserSTT" Method="USP_deleteUserSTT">
+    <Parameter Name="ID_card" Parameter="iD_card" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteVehicle" Method="USP_deleteVehicle">
+    <Parameter Name="vehicle_ID" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteVehicleInfor" Method="USP_deleteVehicleInfor">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteVehicleInforByIdcard" Method="USP_deleteVehicleInforByIdcard">
+    <Parameter Name="ID_Card" Parameter="iD_Card" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteVehicleMistake" Method="USP_deleteVehicleMistake">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_DeleteVehicleMistakeByMistakeID" Method="USP_DeleteVehicleMistakeByMistakeID">
+    <Parameter Name="mistake_ID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_getAdmin" Method="USP_getAdmin">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="USP_getAdminResult">
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getHistory" Method="USP_getHistory">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="USP_getHistoryResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activity" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getInformation" Method="USP_getInformation">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getInformationResult">
+      <Column Name="ID_Card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="FName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getMistakeSTT" Method="USP_getMistakeSTT">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="mistake_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="time_" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="USP_getMistakeSTTResult">
+      <Column Name="status_" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getRequest" Method="USP_getRequest">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getRequestResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="conplain" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="request" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="time_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="reply" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_GetSecretAnswer" Method="USP_GetSecretAnswer">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_GetSecretAnswerResult">
+      <Column Name="secret_answer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getToM" Method="USP_getToM">
+    <Parameter Name="mistake_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="USP_getToMResult">
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="descride" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="charge" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getUserSTT" Method="USP_getUserSTT">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getUserSTTResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getvehicle" Method="USP_getvehicle">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getvehicleResult">
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="frame_Number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="machine_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="brand" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="origin" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getVehicleinfor" Method="USP_getVehicleinfor">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getVehicleinforResult">
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_getVehicleMistake" Method="USP_getVehicleMistake">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="USP_getVehicleMistakeResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descride_mistake" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="time_" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_HistoryTable" Method="USP_HistoryTable">
+    <ElementType Name="USP_HistoryTableResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_admin" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="activity" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_InformationTable" Method="USP_InformationTable">
+    <ElementType Name="USP_InformationTableResult">
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Fname" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Adr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_insert_Admin_data" Method="USP_insert_Admin_data">
+    <Parameter Name="id_Admin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="use_name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="pass" Type="System.String" DbType="Char(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_history" Method="USP_insert_history">
+    <Parameter Name="id_admin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="activity" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_information" Method="USP_insert_information">
+    <Parameter Name="id_Card" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="fname" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="dob" Type="System.Int32" DbType="Int" />
+    <Parameter Name="adr" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_Request" Method="USP_insert_Request">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="complain" Type="System.String" DbType="NText" />
+    <Parameter Name="request" Type="System.String" DbType="NText" />
+    <Parameter Name="reply" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_ToM" Method="USP_insert_ToM">
+    <Parameter Name="mistaks_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="content" Type="System.String" DbType="NText" />
+    <Parameter Name="descride" Type="System.String" DbType="NText" />
+    <Parameter Name="charge" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_UserSTT" Method="USP_insert_UserSTT">
+    <Parameter Name="id_Car" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="stt" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="use_name" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="pass" Type="System.String" DbType="Char(32)" />
+    <Parameter Name="secret_answer" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_vehicle" Method="USP_insert_vehicle">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="frame_number" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="machine_number" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="brand" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="origin" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_vehicle_infor" Method="USP_insert_vehicle_infor">
+    <Parameter Name="id_Card" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_insert_vehicle_mistake" Method="USP_insert_vehicle_mistake">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="mistake_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="descride_mistake" Type="System.String" DbType="NText" />
+    <Parameter Name="stt" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="time_" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_RequestTable" Method="USP_RequestTable">
+    <ElementType Name="USP_RequestTableResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="conplain" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="request" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="reply" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="time_" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_ToMTable" Method="USP_ToMTable">
+    <ElementType Name="USP_ToMTableResult">
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="content" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="descride" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="charge" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_UpdateAdmin" Method="USP_UpdateAdmin">
+    <Parameter Name="prop" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="id_admin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="data" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdateCharge" Method="USP_UpdateCharge">
+    <Parameter Name="id_mistake" Type="System.Int32" DbType="Int" />
+    <Parameter Name="data" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdateFinesSTT" Method="USP_UpdateFinesSTT">
+    <Parameter Name="vehicle_id" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="mistake_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stt" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdateMistake" Method="USP_UpdateMistake">
+    <Parameter Name="id_mistake" Type="System.Int32" DbType="Int" />
+    <Parameter Name="prop" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="data" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdatePass" Method="USP_UpdatePass">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="data" Type="System.String" DbType="VarChar(32)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdateReply" Method="USP_UpdateReply">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="data" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UpdateSecretAnswer" Method="USP_UpdateSecretAnswer">
+    <Parameter Name="id_card" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="data" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_Updatevehicle" Method="USP_Updatevehicle">
+    <Parameter Name="prop" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="vehicle_ID" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="data" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_UserSTT" Method="USP_UserSTT">
+    <ElementType Name="USP_UserSTTResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="use_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="pass" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="secret_answer" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_VehicleInforTable" Method="USP_VehicleInforTable">
+    <ElementType Name="USP_VehicleInforTableResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_card" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_VehicleMistakeTable" Method="USP_VehicleMistakeTable">
+    <ElementType Name="USP_VehicleMistakeTableResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vehicle_ID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="mistake_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="descride_mistake" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="status_" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="time_" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.USP_UpdateCharge" Method="USP_UpdateCharge1">
+    <Parameter Name="id_mistake" Type="System.Int32" DbType="Int" />
+    <Parameter Name="data" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.USP_deleteInformation" Method="USP_deleteInformation">
+    <Parameter Name="ID_card" Parameter="iD_card" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
